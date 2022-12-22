@@ -28,12 +28,15 @@ that contains variables specific for this module and file `output.tf` which cont
 2. Creating subnets 
    - public
    - private
-3. Create an internet gateway for connecting VPC/Network with the internet and also attach gateway to VPC.
-4. Create a route table and create route for internet gateway so that instance can connect to the internet
+3. Creating an internet gateway for connecting VPC/Network with the internet and also attach gateway to VPC.
+4. Creating a route table and create route for internet gateway so that instance can connect to the internet
 5. Associate public subnet with newly created route table.
 6. Creating an Elastic IP for the NAT Gateway.
 7. Creating a NAT gateway and allocate the elastic IP to it and put it in public subnet.
-8. Adding route to NAT gateway to the default (private) route table created along VPC to let resources from private subnet access to the internet. 
+8. Adding route to NAT gateway to the default (private) route table created along VPC to let resources from private subnet access to the internet.
+9. Creating WebDMZ security group allowing communication from / to the internet
 
 ### WebServer
 #### Steps
+1. Creating Key Pair for EC2 instance
+2. Creating EC2 instance, attach it to the public security group in the public subnet
