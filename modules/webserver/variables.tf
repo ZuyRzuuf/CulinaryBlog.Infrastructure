@@ -28,8 +28,13 @@ variable "web_dmz_security_group_id" {
   type        = string
 }
 
-variable "ec2_key_pair" {
-  description = "key pair for EC2 instances"
+variable "ec2_key_pair_path" {
+  description = "path to ssh key file"
+  type        = string
+}
+
+variable "ec2_key_pair_filename" {
+  description = "key pair name for EC2 instances"
   type        = string
 }
 

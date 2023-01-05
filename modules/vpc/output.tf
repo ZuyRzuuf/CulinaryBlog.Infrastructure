@@ -10,5 +10,5 @@ output "public_subnet_id" {
 
 output "web_dmz_security_group_id" {
   description = "WebDMZ security group ID"
-  value       = aws_security_group.security_group.id
+  value       = aws_security_group.security_group_webdmz.id
 }
