@@ -20,8 +20,13 @@ variable "environment" {
   type        = string
 }
 
-variable "ec2_key_pair" {
-  description = "key pair for EC2 instances"
+variable "ec2_key_pair_path" {
+  description = "path to ssh key file"
+  type        = string
+}
+
+variable "ec2_key_pair_filename" {
+  description = "key pair file name for EC2 instances"
   type        = string
 }
 

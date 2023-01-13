@@ -12,6 +12,7 @@ resource "aws_eip" "elastic_ip" {
   vpc = true
 
   tags = {
+    Name    = "${var.project_name} ${var.environment}"
     Project = var.project_name
   }
 }
