@@ -36,7 +36,13 @@ that contains variables specific for this module and file `output.tf` which cont
 8. Adding route to NAT gateway to the default (private) route table created along VPC to let resources from private subnet access to the internet.
 9. Creating WebDMZ security group allowing communication from / to the internet
 
-### WebServer
+### Key Pair
 #### Steps
 1. Creating Key Pair for EC2 instance
-2. Creating EC2 instance, attach it to the public security group in the public subnet
+
+### WebServer
+1. Creating EC2 instance, attach it to the public security group in the public subnet
+
+### Application servers
+#### Steps
+1. Creating two EC2 instance, attach it to the private security group in the private subnet

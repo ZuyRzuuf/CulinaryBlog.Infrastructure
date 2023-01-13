@@ -25,3 +25,6 @@ output "webserver_id" {
 output "webserver_public_ip" {
   value = module.webserver.public_ip
 }
+output "appserver_private_ip" {
+  value = module.app_servers.private_ip
+}
