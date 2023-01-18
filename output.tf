@@ -28,3 +28,6 @@ output "webserver_public_ip" {
 output "appserver_private_ip" {
   value = module.app_servers.private_ip
 }
+output "database_id" {
+  value = module.database.database_id
+}
