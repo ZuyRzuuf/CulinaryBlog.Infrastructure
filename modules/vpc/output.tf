@@ -13,9 +13,14 @@ output "private_subnet_id" {
   value       = aws_subnet.private_subnet.id
 }
 
+output "bastion_dmz_security_group_id" {
+  description = "BastionDMZ security group ID"
+  value       = aws_security_group.security_group_bastion_dmz.id
+}
+
 output "web_dmz_security_group_id" {
   description = "WebDMZ security group ID"
-  value       = aws_security_group.security_group_webdmz.id
+  value       = aws_security_group.security_group_web_dmz.id
 }
 
 output "internal_dmz_security_group_id" {

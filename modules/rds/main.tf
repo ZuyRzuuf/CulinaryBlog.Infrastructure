@@ -13,7 +13,7 @@ resource "aws_db_instance" "main_db" {
   vpc_security_group_ids = [var.db_security_group_id]
   skip_final_snapshot    = true
   multi_az               = false
-  parameter_group_name = "default.mysql8.0"
+  parameter_group_name   = "default.mysql8.0"
 
   tags = {
     Name    = "${var.project_name} Database"

@@ -1,5 +1,5 @@
 # Create public security group
-resource "aws_security_group" "security_group_webdmz" {
+resource "aws_security_group" "security_group_web_dmz" {
   name        = "${var.project_name} WebDMZ"
   description = "WebDMZ security group for ${var.project_name} view layer"
   vpc_id      = aws_vpc.vpc.id
@@ -17,7 +17,7 @@ resource "aws_security_group_rule" "http" {
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.security_group_webdmz.id
+  security_group_id = aws_security_group.security_group_web_dmz.id
 }
 
 resource "aws_security_group_rule" "https" {
@@ -27,27 +27,17 @@ resource "aws_security_group_rule" "https" {
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.security_group_webdmz.id
+  security_group_id = aws_security_group.security_group_web_dmz.id
 }
 
 resource "aws_security_group_rule" "ssh" {
-  type              = "ingress"
-  description       = "Allow traffic on port 22 (SSH) from everywhere"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.security_group_webdmz.id
-}
-
-resource "aws_security_group_rule" "ping" {
-  type              = "ingress"
-  description       = "Allow ICMP traffic (PING) from everywhere"
-  from_port         = -1
-  to_port           = -1
-  protocol          = "icmp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.security_group_webdmz.id
+  type                     = "ingress"
+  description              = "Allow traffic on port 22 (SSH) from Bastion security group"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.security_group_bastion_dmz.id
+  security_group_id        = aws_security_group.security_group_web_dmz.id
 }
 
 resource "aws_security_group_rule" "allow_all_outbound" {
@@ -56,5 +46,5 @@ resource "aws_security_group_rule" "allow_all_outbound" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.security_group_webdmz.id
+  security_group_id = aws_security_group.security_group_web_dmz.id
 }
