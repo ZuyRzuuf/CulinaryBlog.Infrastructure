@@ -21,10 +21,10 @@ module "bastion_host" {
   project_name = var.project_name
   region       = var.region
 
-  vpc_id                    = module.vpc.vpc_id
-  subnet_id                 = module.vpc.public_subnet_id
-  web_dmz_security_group_id = module.vpc.web_dmz_security_group_id
-  ec2_ssh_key_pair_name     = module.ssh_key_pair.key_name
+  vpc_id    = module.vpc.vpc_id
+  subnet_id = module.vpc.public_subnet_id
+  bastion_dmz_security_group_id = module.vpc.bastion_dmz_security_group_id
+  ec2_ssh_key_pair_name         = module.ssh_key_pair.key_name
 }
 
 module "webserver" {
@@ -49,9 +49,9 @@ module "app_servers" {
   project_name = var.project_name
   region       = var.region
 
-  vpc_id                         = module.vpc.vpc_id
-  subnet_id                      = module.vpc.private_subnet_id
-  internal_dmz_security_group_id = module.vpc.web_dmz_security_group_id
+  vpc_id    = module.vpc.vpc_id
+  subnet_id = module.vpc.private_subnet_id
+  internal_dmz_security_group_id = module.vpc.internal_dmz_security_group_id
   ec2_ssh_key_pair_name          = module.ssh_key_pair.key_name
 }
 

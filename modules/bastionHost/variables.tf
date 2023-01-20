@@ -23,8 +23,8 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "web_dmz_security_group_id" {
-  description = "WebDMZ security group ID"
+variable "bastion_dmz_security_group_id" {
+  description = "BastionDMZ security group ID"
   type        = string
 }
 

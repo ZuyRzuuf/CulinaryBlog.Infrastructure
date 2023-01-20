@@ -22,7 +22,7 @@ resource "aws_security_group_rule" "http_internal_dmz" {
 
 resource "aws_security_group_rule" "https_internal_dmz" {
   type              = "ingress"
-  description       = "Allow traffic on port 443 (HTTPS) from everywhere"
+  description       = "Allow traffic on port 443 (HTTPS) from Public Subnet"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
@@ -31,23 +31,13 @@ resource "aws_security_group_rule" "https_internal_dmz" {
 }
 
 resource "aws_security_group_rule" "ssh_internal_dmz" {
-  type              = "ingress"
-  description       = "Allow traffic on port 22 (SSH) from everywhere"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = [aws_subnet.public_subnet.cidr_block]
-  security_group_id = aws_security_group.security_group_internal_dmz.id
-}
-
-resource "aws_security_group_rule" "ping_internal_dmz" {
-  type              = "ingress"
-  description       = "Allow ICMP traffic (PING) from everywhere"
-  from_port         = -1
-  to_port           = -1
-  protocol          = "icmp"
-  cidr_blocks       = [aws_subnet.public_subnet.cidr_block]
-  security_group_id = aws_security_group.security_group_internal_dmz.id
+  type                     = "ingress"
+  description              = "Allow traffic on port 22 (SSH) from Bastion security group"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.security_group_bastion_dmz.id
+  security_group_id        = aws_security_group.security_group_internal_dmz.id
 }
 
 resource "aws_security_group_rule" "allow_all_outbound_internal_dmz" {
